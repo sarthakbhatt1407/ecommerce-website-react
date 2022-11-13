@@ -1,9 +1,19 @@
-import { Mail, ShoppingBagRounded } from "@mui/icons-material";
-import AddReactionIcon from "@mui/icons-material/AddReaction";
-import { Badge } from "@mui/material";
-import React from "react";
+import React, { Fragment } from "react";
+import { Route, Switch } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Slider from "./components/Slider";
+import Home from "./pages/Home";
 const App = () => {
-  return <div></div>;
+  return (
+    <Fragment>
+      <Navbar />
+      <Switch>
+        <Route to="/" exact>
+          <Home />
+        </Route>
+      </Switch>
+    </Fragment>
+  );
 };
 
 export default App;
