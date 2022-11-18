@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import "animate.css";
 const CategoryBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -10,7 +11,8 @@ const CategoryBox = styled.div`
   position: relative;
   height: 40vh;
   transition: all 0.4s;
-
+  animation: fadeIn;
+  animation-duration: 1s;
   @media (max-width: 450px) {
     width: 94%;
     margin: auto;
@@ -87,7 +89,8 @@ const Categories = (props) => {
   return (
     <CategoryBox imgUrl={imgUrl}>
       <h3>{category}</h3>
-      <Link to={`/${category}`}>
+
+      <Link to={`/products/${category}`}>
         <ShopNowBtn>Shop Now</ShopNowBtn>
       </Link>
     </CategoryBox>

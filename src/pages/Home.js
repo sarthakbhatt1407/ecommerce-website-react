@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import Categories from "../components/Categories";
 import Slider from "../components/Slider";
 import styled from "styled-components";
+
 const CategoryBox = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   gap: 1rem;
+
   @media (max-width: 450px) {
     flex-direction: column;
   }

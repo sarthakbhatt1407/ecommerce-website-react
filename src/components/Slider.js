@@ -117,7 +117,7 @@ const Slider = () => {
   };
   setTimeout(() => {
     imageLeft();
-  }, 100);
+  }, 1);
   const slider = () => {
     const images = document.querySelectorAll(".slide");
     images.forEach((slide) => {

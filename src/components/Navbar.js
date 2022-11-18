@@ -66,7 +66,9 @@ const Navbar = () => {
     <Nav>
       <NavbarBox>
         <LogoBox>
-          <LogoImg src={logo} />
+          <Link to="/">
+            <LogoImg src={logo} />
+          </Link>
         </LogoBox>
         <PcTabLinksBox>
           <NavLink to="/">Home</NavLink>
@@ -81,10 +83,15 @@ const Navbar = () => {
         </TogglerBtn>
       </NavbarBox>
       <MobLinksBox className="hidden" id="mobileNav">
-        <NavLink to="/">Home</NavLink>
-
-        <NavLink to="/">Profile</NavLink>
-        <NavLink to="/">Login</NavLink>
+        <NavLink onClick={togglerHandler} to="/">
+          Home
+        </NavLink>
+        <NavLink onClick={togglerHandler} to="/">
+          Profile
+        </NavLink>
+        <NavLink onClick={togglerHandler} to="/">
+          Login
+        </NavLink>
       </MobLinksBox>
     </Nav>
   );
