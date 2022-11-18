@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-
+import "animate.css";
 const MainBox = styled.div`
   border: 1px solid red;
   height: 20vh;
@@ -9,6 +9,8 @@ const MainBox = styled.div`
   border-radius: 0.4rem;
   align-items: center;
   border: 1px solid #eeeeee;
+  animation: fadeIn;
+  animation-duration: 1s;
   box-shadow: 0.2rem 0.2rem 0.4rem #cccccc;
   &:hover {
     box-shadow: 0.2rem 0.2rem 0.4rem #b40e0e;
@@ -16,6 +18,11 @@ const MainBox = styled.div`
   @media (max-width: 450px) {
     flex-direction: column;
     padding-bottom: 1rem;
+  }
+  @media (max-height: 600px) {
+    height: 30vh;
+    justify-content: center;
+    align-items: center;
   }
   @media only screen and (min-width: 451px) and (max-width: 1020px) {
   }
@@ -31,7 +38,10 @@ const MainBox = styled.div`
     width: 25%;
     display: inline-block;
     @media (max-width: 450px) {
-      width: 35%;
+      width: 30%;
+    }
+    @media (max-height: 550px) {
+      width: 15%;
     }
     @media only screen and (min-width: 451px) and (max-width: 1020px) {
       /* width: 35%; */

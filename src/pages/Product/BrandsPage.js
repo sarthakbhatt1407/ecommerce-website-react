@@ -2,6 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import BrandBox from "../../components/BrandBox";
+import Loader from "../../components/Loader";
+const OuterBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+`;
 const PageMainHeading = styled.h2`
   text-align: center;
 `;
@@ -16,11 +23,29 @@ const MainBox = styled.div`
   }
   /* padding: 0.2rem 1rem; */
 `;
-
+const Input = styled.input`
+  background-color: #ffffff;
+  border: 1px solid #c6c6c6;
+  padding: 0.5rem 0.4rem;
+  display: block;
+  border-radius: 0.3rem;
+  width: 50%;
+  @media (max-width: 450px) {
+    width: 70%;
+  }
+  margin: 0.4rem 0;
+`;
+const EmptyPara = styled.p`
+  color: #9a9090;
+  font-size: 1.2rem;
+  letter-spacing: 0.17rem;
+`;
 const BrandsPage = () => {
   const location = useLocation();
   const pathname = location.pathname;
   const [brands, setBrands] = useState([]);
+  const [filteredBrand, setFilteredBrand] = useState(brands);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fetcher = async () => {
       const res = await fetch(
@@ -33,14 +58,32 @@ const BrandsPage = () => {
         arr.push(item);
       }
       setBrands(arr);
+      setFilteredBrand(arr);
     };
     fetcher();
   }, []);
+  const onChangeHanlder = (e) => {
+    setIsLoading(false);
+    const val = e.target.value.toLowerCase();
+    const arr = brands.filter((item) => {
+      return item.includes(val);
+    });
+    setFilteredBrand(arr);
+  };
   return (
-    <>
+    <OuterBox>
       <PageMainHeading>Shop By Brand</PageMainHeading>
+      <Input
+        type="text"
+        onChange={onChangeHanlder}
+        placeholder="Search Brand Name"
+      />
       <MainBox>
-        {brands.map((item) => {
+        {!isLoading && filteredBrand.length === 0 && (
+          <EmptyPara>Oopss! No Brand Found</EmptyPara>
+        )}
+        {isLoading && filteredBrand.length === 0 && <Loader />}
+        {filteredBrand.map((item) => {
           return (
             <Link key={item} to={`${pathname}/${item}`}>
               <BrandBox pathname={pathname} item={item} />
@@ -48,10 +91,8 @@ const BrandsPage = () => {
           );
         })}
       </MainBox>
-    </>
+    </OuterBox>
   );
 };
 
 export default BrandsPage;
-// https://i.ibb.co/5cV2Gt6/apple.png
-// https://i.ibb.co/GdNR935/samsung.png
