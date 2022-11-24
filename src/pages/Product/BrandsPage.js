@@ -21,7 +21,6 @@ const MainBox = styled.div`
     display: block;
     width: 400px;
   }
-  /* padding: 0.2rem 1rem; */
 `;
 const Input = styled.input`
   background-color: #ffffff;
@@ -52,7 +51,6 @@ const BrandsPage = () => {
         `https://ecommerce-website-react-e0fe3-default-rtdb.firebaseio.com/${pathname}.json`
       );
       const data = await res.json();
-      // console.log(data);
       const arr = [];
       for (const item in data) {
         arr.push(item);

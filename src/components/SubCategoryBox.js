@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import "animate.css";
 const MainBox = styled.div`
   border: 1px solid red;
   height: 20vh;
@@ -34,48 +33,30 @@ const MainBox = styled.div`
     @media only screen and (min-width: 451px) and (max-width: 1020px) {
     }
   }
-  img {
-    width: 25%;
-    display: inline-block;
-    @media (max-width: 450px) {
-      width: 30%;
-    }
-    @media (max-height: 550px) {
-      width: 15%;
-    }
-    @media only screen and (min-width: 451px) and (max-width: 1020px) {
-      /* width: 35%; */
-      /* width: 35%; */
-    }
-  }
 `;
 
-const BrandBox = (props) => {
+const SubCategoryBox = (props) => {
+  const pathname = props.pathname;
   const item = props.item;
-  const [brandLogo, setBrandLogo] = useState("");
   useEffect(() => {
     const fetcher = async () => {
       const res = await fetch(
-        `https://ecommerce-website-react-e0fe3-default-rtdb.firebaseio.com${props.pathname}/${item}.json`
+        `https://ecommerce-website-react-e0fe3-default-rtdb.firebaseio.com/${pathname}.json`
       );
       const data = await res.json();
+
+      const arr = [];
       for (const item in data) {
-        for (const obj in data[item]) {
-          setBrandLogo(data[item][obj]["logo"]);
-          break;
-        }
+        arr.push(item);
       }
     };
     fetcher();
   }, []);
   return (
-    <>
-      <MainBox>
-        <img src={brandLogo} alt="" />
-        <h3>{item}</h3>
-      </MainBox>
-    </>
+    <MainBox>
+      <h3>{item}</h3>
+    </MainBox>
   );
 };
 
-export default BrandBox;
+export default SubCategoryBox;

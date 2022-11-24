@@ -3,6 +3,9 @@ import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../assets/logo.jpg";
 import "animate.css";
+import { Badge } from "@mui/material";
+import { Mail, ShoppingCart } from "@mui/icons-material";
+import { useSelector } from "react-redux";
 // Styling
 const Nav = styled.nav``;
 const NavbarBox = styled.div`
@@ -62,6 +65,8 @@ const Navbar = () => {
     mobileNav.classList.toggle("hidden");
     mobileNav.classList.toggle("activeNav");
   };
+  const items = useSelector((state) => state.items);
+
   return (
     <Nav>
       <NavbarBox>
@@ -75,6 +80,12 @@ const Navbar = () => {
 
           <NavLink to="/">Profile</NavLink>
           <NavLink to="/">Login</NavLink>
+          <NavLink to="/cart">
+            Cart
+            <Badge badgeContent={items.length} color="primary">
+              <ShoppingCart />
+            </Badge>
+          </NavLink>
         </PcTabLinksBox>
         <TogglerBtn id="lineBtn" onClick={togglerHandler}>
           <div></div>
