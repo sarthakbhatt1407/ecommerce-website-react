@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Categories from "../components/Categories";
 import Slider from "../components/Slider";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 
 const CategoryBox = styled.div`
   display: flex;
@@ -19,6 +20,7 @@ const CategoryBox = styled.div`
 `;
 
 const Home = () => {
+  const dispatch = useDispatch();
   const [categories, setCategories] = useState([]);
   useEffect(() => {
     const fetcher = async () => {
@@ -31,6 +33,10 @@ const Home = () => {
         arr.push(data[item]);
       }
       setCategories(arr);
+      const localStr = JSON.parse(localStorage.getItem("state"));
+      if (localStr) {
+        dispatch({ type: "reload", item: { ...localStr } });
+      }
     };
     fetcher();
   }, []);

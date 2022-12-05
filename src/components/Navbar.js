@@ -60,6 +60,7 @@ const MobLinksBox = styled.div`
   animation-duration: 0.2s;
 `;
 const Navbar = () => {
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const togglerHandler = () => {
     const mobileNav = document.getElementById("mobileNav");
     mobileNav.classList.toggle("hidden");
@@ -78,14 +79,16 @@ const Navbar = () => {
         <PcTabLinksBox>
           <NavLink to="/">Home</NavLink>
 
-          <NavLink to="/">Profile</NavLink>
-          <NavLink to="/">Login</NavLink>
-          <NavLink to="/cart">
-            Cart
-            <Badge badgeContent={items.length} color="primary">
-              <ShoppingCart />
-            </Badge>
-          </NavLink>
+          {isLoggedIn && <NavLink to="/profile">Profile</NavLink>}
+          {!isLoggedIn && <NavLink to="/login">Login</NavLink>}
+          {!isLoggedIn && <NavLink to="/register">Register</NavLink>}
+          {isLoggedIn && (
+            <NavLink to="/cart">
+              <Badge badgeContent={items.length} color="primary">
+                <ShoppingCart />
+              </Badge>
+            </NavLink>
+          )}
         </PcTabLinksBox>
         <TogglerBtn id="lineBtn" onClick={togglerHandler}>
           <div></div>
@@ -97,12 +100,16 @@ const Navbar = () => {
         <NavLink onClick={togglerHandler} to="/">
           Home
         </NavLink>
-        <NavLink onClick={togglerHandler} to="/">
-          Profile
-        </NavLink>
-        <NavLink onClick={togglerHandler} to="/">
-          Login
-        </NavLink>
+        {isLoggedIn && <NavLink to="/profile">Profile</NavLink>}
+        {!isLoggedIn && <NavLink to="/login">Login</NavLink>}
+        {!isLoggedIn && <NavLink to="/register">Register</NavLink>}
+        {isLoggedIn && (
+          <NavLink onClick={togglerHandler} to="/cart">
+            <Badge badgeContent={items.length} color="primary">
+              <ShoppingCart />
+            </Badge>
+          </NavLink>
+        )}
       </MobLinksBox>
     </Nav>
   );

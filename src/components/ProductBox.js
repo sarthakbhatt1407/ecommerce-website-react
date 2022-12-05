@@ -10,6 +10,7 @@ const MainBox = styled.div`
   @media (max-width: 450px) {
   }
   @media only screen and (min-width: 451px) and (max-width: 1020px) {
+    height: 40vh;
   }
 `;
 
@@ -26,9 +27,13 @@ const TextBox = styled.div`
     flex-direction: column;
   }
   @media only screen and (min-width: 451px) and (max-width: 1020px) {
+    flex-direction: column;
   }
 
   h4 {
+    @media only screen and (min-width: 451px) and (max-width: 1020px) {
+      font-size: 1.1rem;
+    }
     span {
       color: #c4c4c4;
       text-decoration: line-through;
@@ -50,6 +55,9 @@ const TextBox = styled.div`
     margin-right: auto;
     font-size: 1.2rem;
     gap: 2rem;
+    @media only screen and (min-width: 451px) and (max-width: 1020px) {
+      font-size: 1rem;
+    }
     span {
       color: #c4c4c4;
       font-size: 1rem;
@@ -57,20 +65,39 @@ const TextBox = styled.div`
       @media (max-width: 450px) {
         display: none;
       }
-      @media only screen and (min-width: 451px) and (max-width: 1020px) {
+      @media only screen and (min-width: 451px) and (max-width: 520px) {
+        font-size: 0.75rem;
+      }
+      @media only screen and (min-width: 520px) and (max-width: 1020px) {
+        font-size: 0.8rem;
       }
     }
     @media (max-width: 450px) {
       font-size: 0.9rem;
+    }
+    @media only screen and (min-width: 451px) and (max-width: 1020px) {
+      gap: 0.7rem;
     }
   }
 `;
 const ProductBox = (props) => {
   const location = useLocation();
   const pathname = location.pathname;
-  const { name, id, storage, ram, productimg, price, desc, images, processor } =
-    props.item;
-  console.log(productimg);
+  const {
+    name,
+    id,
+    storage,
+    ram,
+    productimg,
+    price,
+    desc,
+    images,
+    processor,
+    mic,
+    driver,
+    connector,
+    productheading,
+  } = props.item;
   const imagesarr = productimg.split(",");
 
   return (
@@ -78,15 +105,23 @@ const ProductBox = (props) => {
       <MainBox id={id}>
         <ImgBox img={imagesarr[0]}></ImgBox>
         <TextBox>
-          <p>
-            {`${name} ${processor} (${ram}, ${storage})`}
-            <span>{desc}</span>
-          </p>
+          {storage && ram && (
+            <p>
+              {`${name} ${processor} (${ram}, ${storage})`}
+              <span>{desc}</span>
+            </p>
+          )}
+
+          {mic && driver && connector && (
+            <p>
+              {`${name} (${productheading})`}
+              <span>{desc}</span>
+            </p>
+          )}
           <h4>
             <span>
-              {" "}
               {parseInt(Math.random() * price + price).toLocaleString("en-IN")}
-            </span>{" "}
+            </span>
             &#8377;
             {price.toLocaleString("en-IN")}
           </h4>

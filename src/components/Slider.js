@@ -124,17 +124,6 @@ const Slider = () => {
       slide.style.transform = `translateX(-${current * 100}%)`;
     });
   };
-  const intv = setInterval(() => {
-    const images = document.querySelectorAll(".slide");
-    if (current < images.length - 1) {
-      current++;
-      slider();
-    } else {
-      current = 0;
-      slider();
-      clearInterval(intv);
-    }
-  }, 3000);
 
   let current = 0;
   const prev = () => {
@@ -160,6 +149,17 @@ const Slider = () => {
     }
     clearInterval(intv);
   };
+  const intv = setInterval(() => {
+    const images = document.querySelectorAll(".slide");
+    if (current < images.length - 1) {
+      current++;
+      slider();
+    } else {
+      current = 0;
+      slider();
+      clearInterval(intv);
+    }
+  }, 3000);
 
   return (
     <>

@@ -3,11 +3,15 @@ import { Route, Switch } from "react-router-dom";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import Cart from "./pages/Cart";
+import CheckoutPage from "./pages/CheckoutPage";
 import Home from "./pages/Home";
+import LoginPage from "./pages/LoginPage";
 import BrandsPage from "./pages/Product/BrandsPage";
 import ProductPage from "./pages/Product/ProductPage";
 import ProductsPage from "./pages/Product/ProductsPage";
 import ProductSubCategory from "./pages/Product/ProductSubCategory";
+import ProfilePage from "./pages/ProfilePage";
+import RegisterPage from "./pages/RegisterPage";
 const App = () => {
   return (
     <Fragment>
@@ -32,11 +36,22 @@ const App = () => {
         >
           <ProductPage />
         </Route>
-        <Route path="/cart">
+        <Route path="/cart" exact>
           <Cart />
         </Route>
+        <Route path="/checkout" exact>
+          <CheckoutPage />
+        </Route>
+        <Route path="/login" exact>
+          <LoginPage />
+        </Route>
+        <Route path="/register" exact>
+          <RegisterPage />
+        </Route>
+        <Route path="/profile" exact>
+          <ProfilePage />
+        </Route>
       </Switch>
-      <Footer />
     </Fragment>
   );
 };

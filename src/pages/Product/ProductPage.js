@@ -8,12 +8,15 @@ const MainBox = styled.div`
   display: grid;
   grid-template-columns: 2fr 3fr;
   overflow: auto;
-  @media (max-width: 450px) {
+  padding: 1rem 0;
+  @media only screen and (min-width: 100px) and (max-width: 1020px) {
     display: flex;
     flex-direction: column;
   }
-  @media only screen and (min-width: 451px) and (max-width: 1020px) {
-  }
+`;
+const LoaderDiv = styled.div`
+  display: block;
+  margin: auto;
 `;
 const SliderBox = styled.div``;
 const ContentBox = styled.div`
@@ -39,7 +42,6 @@ const ProductPage = () => {
       );
       const data = await res.json();
       setProduct([data]);
-
       setImages(data["productimg"].split(","));
       setIsLoading(false);
     };
@@ -52,16 +54,25 @@ const ProductPage = () => {
   };
   return (
     <MainBox>
-      {isLoading && <Loader />}
-      <SliderBox>{images && <ProductPageSlider images={images} />}</SliderBox>
-      <ContentBox>
-        {product.length > 0 && (
-          <ProductInformationBox
-            colorOpt={productColorChanger}
-            product={product[0]}
-          />
-        )}
-      </ContentBox>
+      {isLoading && (
+        <LoaderDiv>
+          <Loader />
+        </LoaderDiv>
+      )}
+      {product.length > 0 && (
+        <SliderBox>{images && <ProductPageSlider images={images} />}</SliderBox>
+      )}
+      {product.length > 0 && (
+        <ContentBox>
+          {product.length > 0 && (
+            <ProductInformationBox
+              image={images}
+              colorOpt={productColorChanger}
+              product={product[0]}
+            />
+          )}
+        </ContentBox>
+      )}
     </MainBox>
   );
 };

@@ -33,9 +33,9 @@ const ArrowLeft = styled.button`
   background-color: transparent;
   position: absolute;
   top: 40%;
-  opacity: 0.6;
+  opacity: 0.2;
   left: 0;
-  font-size: 1.9rem;
+  font-size: 1.5rem;
 `;
 const ArrowRight = styled.button`
   text-align: center;
@@ -43,9 +43,9 @@ const ArrowRight = styled.button`
   background-color: transparent;
   position: absolute;
   right: 0;
-  font-size: 1.9rem;
+  font-size: 1.5rem;
   top: 40%;
-  opacity: 0.6;
+  opacity: 0.2;
 `;
 
 const ProductPageSlider = (props) => {
