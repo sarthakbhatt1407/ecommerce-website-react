@@ -8,6 +8,19 @@ const defaultState = {
   userEmail: "",
 };
 const storeReducer = (state = defaultState, action) => {
+  if (action.type === "ordered") {
+    const obj = {
+      ...state,
+      items: [],
+      totalAmount: 0,
+    };
+    localStorage.setItem("state", JSON.stringify(obj));
+    return {
+      ...state,
+      items: [],
+      totalAmount: 0,
+    };
+  }
   if (action.type === "reload") {
     return {
       ...action.item,

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Loader from "../../components/Loader";
@@ -30,6 +31,7 @@ const ContentBox = styled.div`
 `;
 
 const ProductPage = () => {
+  const dispatch = useDispatch();
   const location = useLocation();
   const pathname = location.pathname;
   const [product, setProduct] = useState([]);
@@ -44,6 +46,10 @@ const ProductPage = () => {
       setProduct([data]);
       setImages(data["productimg"].split(","));
       setIsLoading(false);
+      const localStr = JSON.parse(localStorage.getItem("state"));
+      if (localStr) {
+        dispatch({ type: "reload", item: { ...localStr } });
+      }
     };
     fetcher();
   }, []);

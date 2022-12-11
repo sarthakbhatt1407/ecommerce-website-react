@@ -74,7 +74,7 @@ const RegisterPage = () => {
       const resp = await fetch(
         `https://ecommerce-website-react-e0fe3-default-rtdb.firebaseio.com/users/${
           inpFields.email.split("@")[0]
-        }.json`,
+        }/email.json`,
         {
           method: "POST",
           body: JSON.stringify(userObj),

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { Link } from "react-router-dom";
 const SliderBox = styled.div`
   position: relative;
 `;
@@ -172,17 +173,20 @@ const Slider = () => {
         </SwicthBtn>
         <MainBox>
           {slides.map((item) => {
-            const { desc, heading, id, imgUrl } = item;
+            const { desc, heading, id, imgUrl, category } = item;
+
             return (
-              <SlideBox key={id} className="slide">
-                <ImgBox>
-                  <SlideBoxImg src={imgUrl} />
-                </ImgBox>
-                <TextBox>
-                  <h1>{heading}</h1>
-                  <p>{desc}</p>
-                </TextBox>
-              </SlideBox>
+              <Link key={id} to={`/products/${category}`}>
+                <SlideBox className="slide">
+                  <ImgBox>
+                    <SlideBoxImg src={imgUrl} />
+                  </ImgBox>
+                  <TextBox>
+                    <h1>{heading}</h1>
+                    <p>{desc}</p>
+                  </TextBox>
+                </SlideBox>
+              </Link>
             );
           })}
         </MainBox>

@@ -105,7 +105,8 @@ const CheckeoutAmountBox = styled.div`
   }
 `;
 
-const PriceBox = () => {
+const PriceBox = (props) => {
+  const BtnAdd = props.BtnLinkAdd;
   const items = useSelector((state) => state.items);
 
   const totalAmount = useSelector((state) => state.totalAmount);
@@ -137,8 +138,8 @@ const PriceBox = () => {
           <Link to="/">
             <button>Continue Shopping</button>
           </Link>
-          <Link to="/checkout">
-            <button>Checkout</button>
+          <Link to={BtnAdd}>
+            <button onClick={props.onClick}>Checkout</button>
           </Link>
         </div>
       </CheckeoutAmountBox>

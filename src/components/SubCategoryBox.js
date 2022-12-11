@@ -11,8 +11,9 @@ const MainBox = styled.div`
   animation: fadeIn;
   animation-duration: 1s;
   box-shadow: 0.2rem 0.2rem 0.4rem #cccccc;
+  transition: all 0.4s;
   &:hover {
-    box-shadow: 0.2rem 0.2rem 0.4rem #b40e0e;
+    transform: scale(1.02);
   }
   @media (max-width: 450px) {
     flex-direction: column;

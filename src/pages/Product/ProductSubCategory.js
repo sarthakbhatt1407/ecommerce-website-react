@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Loader from "../../components/Loader";
@@ -25,6 +26,7 @@ const MainBox = styled.div`
 `;
 
 const ProductSubCategory = () => {
+  const dispatch = useDispatch();
   const location = useLocation();
   const pathname = location.pathname;
   const [products, setProducts] = useState([]);
@@ -39,6 +41,10 @@ const ProductSubCategory = () => {
       const arr = [];
       for (const item in data) {
         arr.push(item);
+      }
+      const localStr = JSON.parse(localStorage.getItem("state"));
+      if (localStr) {
+        dispatch({ type: "reload", item: { ...localStr } });
       }
       setProducts(arr);
       setIsLoading(false);

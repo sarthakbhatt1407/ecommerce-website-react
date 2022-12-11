@@ -100,12 +100,25 @@ const Navbar = () => {
         <NavLink onClick={togglerHandler} to="/">
           Home
         </NavLink>
-        {isLoggedIn && <NavLink to="/profile">Profile</NavLink>}
-        {!isLoggedIn && <NavLink to="/login">Login</NavLink>}
-        {!isLoggedIn && <NavLink to="/register">Register</NavLink>}
+        {isLoggedIn && (
+          <NavLink onClick={togglerHandler} to="/profile">
+            Profile
+          </NavLink>
+        )}
+        {!isLoggedIn && (
+          <NavLink onClick={togglerHandler} to="/login">
+            Login
+          </NavLink>
+        )}
+        {!isLoggedIn && (
+          <NavLink onClick={togglerHandler} to="/register">
+            Register
+          </NavLink>
+        )}
         {isLoggedIn && (
           <NavLink onClick={togglerHandler} to="/cart">
             <Badge badgeContent={items.length} color="primary">
+              Cart
               <ShoppingCart />
             </Badge>
           </NavLink>

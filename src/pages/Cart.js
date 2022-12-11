@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import CartBox from "../components/CartBox";
 import PriceBox from "../components/PriceBox";
+import StoreLoader from "../components/StoreLoader";
 const MainBox = styled.div`
   background-color: #f6f6f6;
   padding: 1rem 0;
@@ -48,55 +49,8 @@ const ItemBox = styled.div`
   overflow: auto;
 `;
 
-const CheckeoutAmountBox = styled.div`
-  display: grid;
-  grid-template-columns: 0.5fr 1fr;
-  padding: 1rem 0;
-  margin: 0.5rem 0;
-
-  align-items: center;
-  background-color: white;
-  border-radius: 0.4rem;
-  @media (max-width: 450px) {
-    grid-template-columns: 0fr 1fr;
-    gap: 1rem;
-  }
-  @media only screen and (min-width: 1021px) and (max-width: 1320px) {
-    grid-template-columns: 0.13fr 1fr;
-  }
-  @media only screen and (min-width: 650px) and (max-width: 1021px) {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  div {
-    display: flex;
-    justify-content: space-around;
-    @media (max-width: 450px) {
-    }
-    @media only screen and (min-width: 451px) and (max-width: 615px) {
-    }
-    button {
-      border: none;
-      background-color: #fb641b;
-      color: white;
-      padding: 0.5rem 0.5rem;
-      border-radius: 0.4rem;
-      font-weight: 700;
-      letter-spacing: 0.06rem;
-      font-size: 0.9rem;
-      @media (max-width: 450px) {
-      }
-      @media only screen and (min-width: 451px) and (max-width: 615px) {
-      }
-    }
-  }
-`;
-
 const Cart = () => {
   const items = useSelector((state) => state.items);
-  const store = useSelector((state) => state);
-  const totalAmount = useSelector((state) => state.totalAmount);
-  // console.log(store);
   const dispatch = useDispatch();
   useEffect(() => {
     const localStr = JSON.parse(localStorage.getItem("state"));
@@ -140,12 +94,20 @@ const Cart = () => {
         <ItemPriceBox>
           <ItemBox>
             {items.map((item) => {
-              return <CartBox item={item} key={item.productimg} id={item.id} />;
+              return (
+                <CartBox
+                  display={true}
+                  item={item}
+                  key={item.productimg}
+                  id={item.id}
+                />
+              );
             })}
           </ItemBox>
-          <PriceBox />
+          <PriceBox BtnLinkAdd={`/checkout`} />
         </ItemPriceBox>
       )}
+      <StoreLoader />
     </MainBox>
   );
 };

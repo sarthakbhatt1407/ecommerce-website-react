@@ -193,7 +193,7 @@ const CartBox = (props) => {
             -
           </button>
         </QuantityBox>
-        <RemoveBtn onClick={removeHanlder}>Remove</RemoveBtn>
+        {props.display && <RemoveBtn onClick={removeHanlder}>Remove</RemoveBtn>}
       </QuantityRemoveBox>
     </MainBox>
   );

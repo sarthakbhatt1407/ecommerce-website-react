@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import BrandBox from "../../components/BrandBox";
@@ -41,6 +42,7 @@ const EmptyPara = styled.p`
 `;
 const BrandsPage = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
   const pathname = location.pathname;
   const [brands, setBrands] = useState([]);
   const [filteredBrand, setFilteredBrand] = useState(brands);
@@ -54,6 +56,10 @@ const BrandsPage = () => {
       const arr = [];
       for (const item in data) {
         arr.push(item);
+      }
+      const localStr = JSON.parse(localStorage.getItem("state"));
+      if (localStr) {
+        dispatch({ type: "reload", item: { ...localStr } });
       }
       setBrands(arr);
       setFilteredBrand(arr);

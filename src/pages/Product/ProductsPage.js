@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Loader from "../../components/Loader";
@@ -46,7 +47,7 @@ const ProductsPage = (props) => {
     });
     setFilteredProducts(arr);
   };
-
+  const dispatch = useDispatch();
   useEffect(() => {
     const fetcher = async () => {
       const res = await fetch(
@@ -59,6 +60,10 @@ const ProductsPage = (props) => {
       for (const item in data) {
         obj = { ...data[item], id: item };
         arr.push(obj);
+      }
+      const localStr = JSON.parse(localStorage.getItem("state"));
+      if (localStr) {
+        dispatch({ type: "reload", item: { ...localStr } });
       }
       setProducts(arr);
       setFilteredProducts(arr);

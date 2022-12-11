@@ -6,12 +6,14 @@ import Cart from "./pages/Cart";
 import CheckoutPage from "./pages/CheckoutPage";
 import Home from "./pages/Home";
 import LoginPage from "./pages/LoginPage";
+import PaymentPage from "./pages/PaymentPage";
 import BrandsPage from "./pages/Product/BrandsPage";
 import ProductPage from "./pages/Product/ProductPage";
 import ProductsPage from "./pages/Product/ProductsPage";
 import ProductSubCategory from "./pages/Product/ProductSubCategory";
 import ProfilePage from "./pages/ProfilePage";
 import RegisterPage from "./pages/RegisterPage";
+import YourOrders from "./pages/YourOrders";
 const App = () => {
   return (
     <Fragment>
@@ -50,6 +52,12 @@ const App = () => {
         </Route>
         <Route path="/profile" exact>
           <ProfilePage />
+        </Route>
+        <Route path="/payment" exact>
+          <PaymentPage />
+        </Route>
+        <Route path="/profile/orders" exact>
+          <YourOrders />
         </Route>
       </Switch>
     </Fragment>
