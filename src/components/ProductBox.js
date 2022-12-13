@@ -7,7 +7,10 @@ const MainBox = styled.div`
   grid-template-columns: 1fr 3fr;
   padding: 2rem 1rem;
   justify-content: center;
-  @media (max-width: 450px) {
+  width: 80%;
+  margin: auto;
+  @media (max-width: 750px) {
+    width: 100%;
   }
   @media only screen and (min-width: 451px) and (max-width: 1020px) {
     height: 40vh;

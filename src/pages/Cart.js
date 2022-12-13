@@ -10,8 +10,8 @@ const MainBox = styled.div`
   padding: 1rem 0;
 `;
 const EmptyMsg = styled.p`
-  text-align: center;
   padding: 3rem 0;
+  text-align: center;
   font-size: 1.6rem;
   letter-spacing: 0.09rem;
   font-weight: 600;
@@ -107,7 +107,6 @@ const Cart = () => {
           <PriceBox BtnLinkAdd={`/checkout`} />
         </ItemPriceBox>
       )}
-      <StoreLoader />
     </MainBox>
   );
 };

@@ -9,7 +9,17 @@ const OuterBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem 0;
+  padding: 3rem 0;
+  gap: 2.2rem;
+  button {
+    padding: 0.5rem 4rem;
+    border: none;
+    background-color: white;
+    border-radius: 1rem;
+    font-weight: 450;
+    font-size: 1.2rem;
+    letter-spacing: 0.2rem;
+  }
   @media (max-width: 450px) {
   }
 `;
@@ -18,6 +28,7 @@ const MainBox = styled.div`
   gap: 3rem;
   @media (max-width: 850px) {
     flex-direction: column;
+    gap: 1.5rem;
   }
   @media only screen and (min-width: 851px) and (max-width: 1095px) {
     gap: 1rem;
@@ -68,13 +79,14 @@ const ProfilePage = () => {
   };
   return (
     <OuterBox>
-      <h3>Your Profile</h3>
-      {/* <button onClick={logOut}>LogOut</button> */}
+      <h1>Your Profile</h1>
+
       <MainBox>
         {obj.map((item) => {
           return <ProfileBox key={item.id} item={item} />;
         })}
       </MainBox>
+      <button onClick={logOut}>Log Out</button>
     </OuterBox>
   );
 };

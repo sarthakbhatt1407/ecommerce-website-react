@@ -17,7 +17,14 @@ const ImgBox = styled.div`
   background-repeat: no-repeat;
   background-position: center;
 `;
-const TextBox = styled.div``;
+const TextBox = styled.div`
+  h4 {
+    font-weight: 400;
+  }
+  p {
+    font-weight: 400;
+  }
+`;
 const ProfileBox = (props) => {
   const item = props.item;
   const { title, desc, img, link } = item;

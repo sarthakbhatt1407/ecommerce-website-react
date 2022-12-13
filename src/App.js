@@ -2,6 +2,7 @@ import React, { Fragment, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import AddressPage from "./pages/AddressPage";
 import Cart from "./pages/Cart";
 import CheckoutPage from "./pages/CheckoutPage";
 import Home from "./pages/Home";
@@ -13,6 +14,7 @@ import ProductsPage from "./pages/Product/ProductsPage";
 import ProductSubCategory from "./pages/Product/ProductSubCategory";
 import ProfilePage from "./pages/ProfilePage";
 import RegisterPage from "./pages/RegisterPage";
+import SecurityPage from "./pages/SecurityPage";
 import YourOrders from "./pages/YourOrders";
 const App = () => {
   return (
@@ -58,6 +60,12 @@ const App = () => {
         </Route>
         <Route path="/profile/orders" exact>
           <YourOrders />
+        </Route>
+        <Route path="/profile/address" exact>
+          <AddressPage />
+        </Route>
+        <Route path="/profile/security" exact>
+          <SecurityPage />
         </Route>
       </Switch>
     </Fragment>
