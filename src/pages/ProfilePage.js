@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
+import Footer from "../components/Footer";
 import ProfileBox from "../components/ProfileBox";
 const OuterBox = styled.div`
   background-color: #f7f6f6;
@@ -78,16 +79,19 @@ const ProfilePage = () => {
     history.push("/");
   };
   return (
-    <OuterBox>
-      <h1>Your Profile</h1>
+    <>
+      <OuterBox>
+        <h1>Your Profile</h1>
 
-      <MainBox>
-        {obj.map((item) => {
-          return <ProfileBox key={item.id} item={item} />;
-        })}
-      </MainBox>
-      <button onClick={logOut}>Log Out</button>
-    </OuterBox>
+        <MainBox>
+          {obj.map((item) => {
+            return <ProfileBox key={item.id} item={item} />;
+          })}
+        </MainBox>
+        <button onClick={logOut}>Log Out</button>
+      </OuterBox>
+      <Footer />
+    </>
   );
 };
 

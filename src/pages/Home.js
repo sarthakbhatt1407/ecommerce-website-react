@@ -3,6 +3,7 @@ import Categories from "../components/Categories";
 import Slider from "../components/Slider";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
+import Footer from "../components/Footer";
 
 const CategoryBox = styled.div`
   display: flex;
@@ -10,7 +11,7 @@ const CategoryBox = styled.div`
   justify-content: center;
   align-items: center;
   gap: 1rem;
-
+  margin: 1rem 0 3rem 0;
   @media (max-width: 450px) {
     flex-direction: column;
   }
@@ -48,6 +49,7 @@ const Home = () => {
           return <Categories key={item.category} item={item} />;
         })}
       </CategoryBox>
+      {categories.length > 0 && <Footer />}
     </>
   );
 };

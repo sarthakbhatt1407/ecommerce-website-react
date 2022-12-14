@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import CartBox from "../components/CartBox";
+import Footer from "../components/Footer";
 import PriceBox from "../components/PriceBox";
 const OuterBox = styled.div`
   background-color: #f6f6f6;
@@ -223,85 +224,88 @@ const CheckoutPage = () => {
   };
   console.log();
   return (
-    <OuterBox>
-      <MainBox>
-        <ItemAddressBox>
-          <AddressFormBox>
-            <h3>Address</h3>
-            <FormBox>
-              <LabelInpBox>
-                <label htmlFor="name">Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  onChange={onChangeHandler}
-                  onBlur={onBlurhandler}
-                />
-              </LabelInpBox>
-              <LabelInpBox>
-                <label htmlFor="phone">Phone</label>
-                <input
-                  type="number"
-                  id="phone"
-                  onChange={onChangeHandler}
-                  onBlur={onBlurhandler}
-                />
-              </LabelInpBox>
-              <LabelInpBox>
-                <label htmlFor="streetaddress">Address</label>
-                <input
-                  type="text"
-                  id="streetaddress"
-                  onChange={onChangeHandler}
-                  onBlur={onBlurhandler}
-                />
-              </LabelInpBox>
-              <LabelInpBox>
-                <label htmlFor="pinCode">Pin Code</label>
-                <input
-                  type="number"
-                  id="pinCode"
-                  onChange={onChangeHandler}
-                  onBlur={onBlurhandler}
-                />
-              </LabelInpBox>
-              <LabelInpBox>
-                <label htmlFor="city">City</label>
-                <input
-                  type="text"
-                  id="city"
-                  onChange={onChangeHandler}
-                  onBlur={onBlurhandler}
-                />
-              </LabelInpBox>
-              <LabelInpBox>
-                <label htmlFor="state">State</label>
-                <input
-                  type="text"
-                  id="state"
-                  onChange={onChangeHandler}
-                  onBlur={onBlurhandler}
-                />
-              </LabelInpBox>
-            </FormBox>
-          </AddressFormBox>
-          <ItemBox>
-            <h3>Items</h3>
-            {items.map((item) => {
-              return (
-                <CartBox
-                  item={item}
-                  key={item.productimg}
-                  id={item.id}
-                  display={false}
-                />
-              );
-            })}
-          </ItemBox>
-        </ItemAddressBox>
-        <PriceBox BtnLinkAdd={`/payment`} onClick={addressSubmitter} />
-      </MainBox>
-    </OuterBox>
+    <>
+      <OuterBox>
+        <MainBox>
+          <ItemAddressBox>
+            <AddressFormBox>
+              <h3>Address</h3>
+              <FormBox>
+                <LabelInpBox>
+                  <label htmlFor="name">Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    onChange={onChangeHandler}
+                    onBlur={onBlurhandler}
+                  />
+                </LabelInpBox>
+                <LabelInpBox>
+                  <label htmlFor="phone">Phone</label>
+                  <input
+                    type="number"
+                    id="phone"
+                    onChange={onChangeHandler}
+                    onBlur={onBlurhandler}
+                  />
+                </LabelInpBox>
+                <LabelInpBox>
+                  <label htmlFor="streetaddress">Address</label>
+                  <input
+                    type="text"
+                    id="streetaddress"
+                    onChange={onChangeHandler}
+                    onBlur={onBlurhandler}
+                  />
+                </LabelInpBox>
+                <LabelInpBox>
+                  <label htmlFor="pinCode">Pin Code</label>
+                  <input
+                    type="number"
+                    id="pinCode"
+                    onChange={onChangeHandler}
+                    onBlur={onBlurhandler}
+                  />
+                </LabelInpBox>
+                <LabelInpBox>
+                  <label htmlFor="city">City</label>
+                  <input
+                    type="text"
+                    id="city"
+                    onChange={onChangeHandler}
+                    onBlur={onBlurhandler}
+                  />
+                </LabelInpBox>
+                <LabelInpBox>
+                  <label htmlFor="state">State</label>
+                  <input
+                    type="text"
+                    id="state"
+                    onChange={onChangeHandler}
+                    onBlur={onBlurhandler}
+                  />
+                </LabelInpBox>
+              </FormBox>
+            </AddressFormBox>
+            <ItemBox>
+              <h3>Items</h3>
+              {items.map((item) => {
+                return (
+                  <CartBox
+                    item={item}
+                    key={item.productimg}
+                    id={item.id}
+                    display={false}
+                  />
+                );
+              })}
+            </ItemBox>
+          </ItemAddressBox>
+          <PriceBox BtnLinkAdd={`/payment`} onClick={addressSubmitter} />
+        </MainBox>
+      </OuterBox>
+      <Footer />
+    </>
   );
 };
 

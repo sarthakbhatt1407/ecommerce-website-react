@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import AddressBox from "../components/AddressBox";
+import Footer from "../components/Footer";
 const NoAddressBox = styled.div`
   display: flex;
   height: 70vh;
@@ -111,6 +112,7 @@ const AddressPage = () => {
             })}
         </MainBox>
       </OuterBox>
+      <Footer />
     </>
   );
 };

@@ -75,27 +75,29 @@ const BrandsPage = () => {
     setFilteredBrand(arr);
   };
   return (
-    <OuterBox>
-      <PageMainHeading>Shop By Brand</PageMainHeading>
-      <Input
-        type="text"
-        onChange={onChangeHanlder}
-        placeholder="Search Brand Name"
-      />
-      <MainBox>
-        {!isLoading && filteredBrand.length === 0 && (
-          <EmptyPara>Oopss! No Brand Found</EmptyPara>
-        )}
-        {isLoading && filteredBrand.length === 0 && <Loader />}
-        {filteredBrand.map((item) => {
-          return (
-            <Link key={item} to={`${pathname}/${item}`}>
-              <BrandBox pathname={pathname} item={item} />
-            </Link>
-          );
-        })}
-      </MainBox>
-    </OuterBox>
+    <>
+      <OuterBox>
+        <PageMainHeading>Shop By Brand</PageMainHeading>
+        <Input
+          type="text"
+          onChange={onChangeHanlder}
+          placeholder="Search Brand Name"
+        />
+        <MainBox>
+          {!isLoading && filteredBrand.length === 0 && (
+            <EmptyPara>Oopss! No Brand Found</EmptyPara>
+          )}
+          {isLoading && filteredBrand.length === 0 && <Loader />}
+          {filteredBrand.map((item) => {
+            return (
+              <Link key={item} to={`${pathname}/${item}`}>
+                <BrandBox pathname={pathname} item={item} />
+              </Link>
+            );
+          })}
+        </MainBox>
+      </OuterBox>
+    </>
   );
 };
 

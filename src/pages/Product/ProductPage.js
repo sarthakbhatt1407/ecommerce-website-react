@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
+import Footer from "../../components/Footer";
 import Loader from "../../components/Loader";
 import ProductInformationBox from "../../components/ProductInformationBox";
 import ProductPageSlider from "../../components/ProductPageSlider";
@@ -59,27 +60,32 @@ const ProductPage = () => {
     }
   };
   return (
-    <MainBox>
-      {isLoading && (
-        <LoaderDiv>
-          <Loader />
-        </LoaderDiv>
-      )}
-      {product.length > 0 && (
-        <SliderBox>{images && <ProductPageSlider images={images} />}</SliderBox>
-      )}
-      {product.length > 0 && (
-        <ContentBox>
-          {product.length > 0 && (
-            <ProductInformationBox
-              image={images}
-              colorOpt={productColorChanger}
-              product={product[0]}
-            />
-          )}
-        </ContentBox>
-      )}
-    </MainBox>
+    <>
+      <MainBox>
+        {isLoading && (
+          <LoaderDiv>
+            <Loader />
+          </LoaderDiv>
+        )}
+        {product.length > 0 && (
+          <SliderBox>
+            {images && <ProductPageSlider images={images} />}
+          </SliderBox>
+        )}
+        {product.length > 0 && (
+          <ContentBox>
+            {product.length > 0 && (
+              <ProductInformationBox
+                image={images}
+                colorOpt={productColorChanger}
+                product={product[0]}
+              />
+            )}
+          </ContentBox>
+        )}
+      </MainBox>
+      <Footer />
+    </>
   );
 };
 

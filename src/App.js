@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Redirect, Route, Switch } from "react-router-dom";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import AddressPage from "./pages/AddressPage";
@@ -17,6 +18,7 @@ import RegisterPage from "./pages/RegisterPage";
 import SecurityPage from "./pages/SecurityPage";
 import YourOrders from "./pages/YourOrders";
 const App = () => {
+  const userLoggedIn = useSelector((state) => state.isLoggedIn);
   return (
     <Fragment>
       <Navbar />
@@ -40,32 +42,40 @@ const App = () => {
         >
           <ProductPage />
         </Route>
-        <Route path="/cart" exact>
-          <Cart />
-        </Route>
-        <Route path="/checkout" exact>
-          <CheckoutPage />
-        </Route>
         <Route path="/login" exact>
           <LoginPage />
         </Route>
         <Route path="/register" exact>
           <RegisterPage />
         </Route>
-        <Route path="/profile" exact>
-          <ProfilePage />
+        <Route path="/cart" exact>
+          <Cart />
         </Route>
-        <Route path="/payment" exact>
-          <PaymentPage />
-        </Route>
-        <Route path="/profile/orders" exact>
-          <YourOrders />
-        </Route>
-        <Route path="/profile/address" exact>
-          <AddressPage />
-        </Route>
-        <Route path="/profile/security" exact>
-          <SecurityPage />
+        {userLoggedIn && (
+          <Fragment>
+            {" "}
+            <Route path="/checkout" exact>
+              <CheckoutPage />
+            </Route>
+            <Route path="/profile" exact>
+              <ProfilePage />
+            </Route>
+            <Route path="/payment" exact>
+              <PaymentPage />
+            </Route>
+            <Route path="/profile/orders" exact>
+              <YourOrders />
+            </Route>
+            <Route path="/profile/address" exact>
+              <AddressPage />
+            </Route>
+            <Route path="/profile/security" exact>
+              <SecurityPage />
+            </Route>
+          </Fragment>
+        )}
+        <Route path="*" exact>
+          <Redirect to="/" />
         </Route>
       </Switch>
     </Fragment>

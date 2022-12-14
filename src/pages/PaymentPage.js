@@ -5,6 +5,7 @@ import CheckMark from "../components/CheckMark";
 import OrderSummary from "../components/OrderSummary";
 import "animate.css";
 import { useHistory } from "react-router-dom";
+import Footer from "../components/Footer";
 
 const MainBox = styled.div`
   animation: zoomIn;
@@ -218,6 +219,7 @@ const PaymentPage = () => {
           </InfoBox>
         </MainBox>
       )}
+      {order && <Footer />}
     </Fragment>
   );
 };

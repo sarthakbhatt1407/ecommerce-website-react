@@ -3,12 +3,25 @@ import { useDispatch, useSelector } from "react-redux";
 import styled, { keyframes } from "styled-components";
 import "animate.css";
 import { useHistory } from "react-router-dom";
+import register from "../assets/register.svg";
+const OuterBox = styled.div`
+  height: 100vh;
+  position: relative;
+  background-image: url(${(props) => props.img});
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  @media (max-width: 750px) {
+    background-size: cover;
+  }
+`;
 const MainBox = styled.div`
   display: flex;
+
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 60vh;
+  height: 80vh;
   @media (max-width: 450px) {
     height: 80vh;
   }
@@ -17,13 +30,15 @@ const MainBox = styled.div`
 `;
 
 const FormBox = styled.div`
-  border: 1px solid black;
   height: 40vh;
   width: 40vw;
   display: flex;
+  z-index: 2;
+  background-color: white;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  box-shadow: 0.1rem 0.2rem 0.5rem #a5a5a5;
   gap: 1rem;
   @media (max-width: 650px) {
     width: 90vw;
@@ -38,18 +53,21 @@ const FormBox = styled.div`
     letter-spacing: 0.03rem;
   }
   input {
-    padding: 0.6rem 1rem;
-    margin: 0.6rem 0.2rem;
+    padding: 0.6rem 2rem;
+    border: 1px solid #e8e8e8;
+    border-radius: 0.3rem;
+    box-shadow: 0.1rem 0.2rem 0.5rem #eaeaea;
     width: 70%;
   }
   button {
-    padding: 0.3rem 3rem;
     border: none;
-    background-color: #fb641b;
+    padding: 0.5rem 1rem;
+    background-color: #4b74d9;
     color: white;
-    letter-spacing: 0.07rem;
-    font-weight: 550;
     font-size: 1.1rem;
+    letter-spacing: 0.16rem;
+    border-radius: 2rem;
+    font-weight: 600;
   }
 `;
 
@@ -131,36 +149,38 @@ const SecurityPage = () => {
     SetInpFields({ ...inpFields, [id]: val });
   };
   return (
-    <MainBox>
-      <FormBox>
-        <h4>Reset Your Password</h4>
-        {!emailIsValid && <p>Kindly verify yor email : {finalDemoEmail}</p>}
-        {!emailIsValid && (
-          <EmailInput
-            type="email"
-            placeholder="Enter Your Email"
-            id="email"
-            onChange={onChangeHandler}
-          />
-        )}
-        {!emailIsValid && (
-          <SubmitButton id="submit" onClick={emailSubmitter}>
-            Submit
-          </SubmitButton>
-        )}
-        {emailIsValid && (
-          <PasswordInput
-            type="password"
-            placeholder="Enter New Password"
-            id="password"
-            onChange={onChangeHandler}
-          />
-        )}
-        {emailIsValid && (
-          <ResetButton onClick={resetHandler}>Reset</ResetButton>
-        )}
-      </FormBox>
-    </MainBox>
+    <OuterBox img={register}>
+      <MainBox>
+        <FormBox>
+          <h3>Reset Your Password</h3>
+          {!emailIsValid && <p>Kindly verify yor email : {finalDemoEmail}</p>}
+          {!emailIsValid && (
+            <EmailInput
+              type="email"
+              placeholder="Enter Your Email"
+              id="email"
+              onChange={onChangeHandler}
+            />
+          )}
+          {!emailIsValid && (
+            <SubmitButton id="submit" onClick={emailSubmitter}>
+              Submit
+            </SubmitButton>
+          )}
+          {emailIsValid && (
+            <PasswordInput
+              type="password"
+              placeholder="Enter New Password"
+              id="password"
+              onChange={onChangeHandler}
+            />
+          )}
+          {emailIsValid && (
+            <ResetButton onClick={resetHandler}>Reset</ResetButton>
+          )}
+        </FormBox>
+      </MainBox>
+    </OuterBox>
   );
 };
 
