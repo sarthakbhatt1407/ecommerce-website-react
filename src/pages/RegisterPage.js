@@ -2,33 +2,74 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
+import register from "../assets/register.svg";
 
 const OuterBox = styled.div`
   height: 100vh;
   position: relative;
+  background-image: url(${(props) => props.img});
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  @media (max-width: 750px) {
+    background-size: cover;
+  }
 `;
 const LoginBox = styled.div`
-  border: 1px solid black;
-  padding: 1rem 4rem;
+  padding: 2rem 4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 2.4rem;
   position: absolute;
-  top: 50%;
+  top: 45%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0.1rem 0.2rem 0.5rem #a5a5a5;
+  transform: translate(-45%, -50%);
+  @media (max-width: 750px) {
+    left: 47%;
+    height: 50vh;
+    padding: 2rem 3rem;
+  }
+  @media only screen and (min-width: 451px) and (max-width: 1020px) {
+  }
+  h1 {
+    font-size: 2rem;
+  }
 `;
 const FormBox = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
+  a {
+    p {
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: 0.12rem;
+      font-size: 1rem;
+      @media (max-width: 750px) {
+        letter-spacing: 0.09rem;
+      }
+    }
+  }
   button {
     border: none;
+    padding: 0.5rem 1rem;
+    background-color: #4b74d9;
+    color: white;
+    font-size: 1.1rem;
+    letter-spacing: 0.16rem;
+    border-radius: 2rem;
+    font-weight: 600;
   }
 `;
 const Input = styled.input`
-  padding: 0.3rem 0.7rem;
+  padding: 0.6rem 2rem;
+  border: 1px solid #e8e8e8;
+  border-radius: 0.3rem;
+  box-shadow: 0.1rem 0.2rem 0.5rem #eaeaea;
 `;
 
 const RegisterPage = () => {
@@ -86,9 +127,9 @@ const RegisterPage = () => {
   };
 
   return (
-    <OuterBox>
+    <OuterBox img={register}>
       <LoginBox>
-        <h3>Register</h3>
+        <h1>Register</h1>
         <FormBox>
           <Input
             type="email"
@@ -107,7 +148,7 @@ const RegisterPage = () => {
           <button onClick={onClickHandler}>Register</button>
 
           <Link to="/login">
-            <p>Already Have Account? Login Now</p>
+            <p>Existing User? Login Now</p>
           </Link>
         </FormBox>
       </LoginBox>
