@@ -165,8 +165,6 @@ const PaymentPage = () => {
     "December",
   ];
   const history = useHistory();
-  if (order) {
-  }
 
   return (
     <Fragment>
@@ -194,9 +192,7 @@ const PaymentPage = () => {
                   <tr key="">
                     <td>
                       {`${
-                        monthNames[
-                          order["time"].split(",")[0].split("/")[1] - 1
-                        ]
+                        monthNames[order["time"].split(",")[0].split("/")[1]]
                       } ${order["time"].split(",")[0].split("/")[0]}, ${
                         order["time"].split(",")[0].split("/")[2]
                       }`}

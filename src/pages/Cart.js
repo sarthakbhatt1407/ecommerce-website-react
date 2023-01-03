@@ -8,6 +8,10 @@ import StoreLoader from "../components/StoreLoader";
 const MainBox = styled.div`
   background-color: #f6f6f6;
   padding: 1rem 0;
+  h2 {
+    text-align: center;
+    margin: 1rem 0;
+  }
 `;
 const EmptyMsg = styled.p`
   padding: 3rem 0;
@@ -61,34 +65,9 @@ const Cart = () => {
 
   const email = useSelector((state) => state.userEmail);
 
-  // const addOrder = async () => {
-  //   const dateObj = new Date();
-  //   const date = dateObj.getDate();
-  //   const month = dateObj.getMonth();
-  //   const year = dateObj.getFullYear();
-  //   const hour24 = dateObj.getHours();
-  //   const hour12 = hour24 > 12 ? hour24 - 12 : hour24;
-  //   const min = dateObj.getMinutes();
-  //   const sec = dateObj.getSeconds();
-  //   const orderDateAndTime = `${date}/${month}/${year}, ${hour12}:${min}:${sec}`;
-
-  //   const obj = {
-  //     items: items,
-  //     totalAmount: totalAmount,
-  //     time: orderDateAndTime,
-  //   };
-  //   const res = await fetch(
-  //     `https://ecommerce-website-react-e0fe3-default-rtdb.firebaseio.com/orders/${
-  //       email.split("@")[0]
-  //     }.json`,
-  //     {
-  //       method: "POST",
-  //       body: JSON.stringify(obj),
-  //     }
-  //   );
-  // };
   return (
     <MainBox>
+      <h2>Your Cart</h2>
       {!items.length > 0 && <EmptyMsg>Your cart is empty!</EmptyMsg>}
       {items.length > 0 && (
         <ItemPriceBox>
@@ -104,7 +83,7 @@ const Cart = () => {
               );
             })}
           </ItemBox>
-          <PriceBox BtnLinkAdd={`/checkout`} />
+          <PriceBox dis={true} BtnLinkAdd={`/checkout`} />
         </ItemPriceBox>
       )}
     </MainBox>

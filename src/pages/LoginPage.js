@@ -1,9 +1,21 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import login from "../assets/login.png";
 
+const spin = keyframes`
+0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+`;
+const BtnLoad = styled.div`
+  border: 3px solid white; /* Light grey */
+  border-top: 3px solid black; /* Blue */
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  animation: ${spin} 2s linear infinite;
+`;
 const OuterBox = styled.div`
   height: 100vh;
   position: relative;
@@ -27,7 +39,7 @@ const LoginBox = styled.div`
   background-color: white;
   border-radius: 0.5rem;
   box-shadow: 0.1rem 0.2rem 0.5rem #a5a5a5;
-  transform: translate(-45%, -50%);
+  transform: translate(-47%, -50%);
   @media (max-width: 750px) {
     left: 47%;
     height: 50vh;
@@ -55,6 +67,8 @@ const FormBox = styled.div`
     }
   }
   button {
+    display: flex;
+    justify-content: center;
     border: none;
     padding: 0.5rem 1rem;
     background-color: #4b74d9;
@@ -79,7 +93,7 @@ const LoginPage = () => {
   };
   const dispatch = useDispatch();
   const history = useHistory();
-
+  const [btnLoading, setBtnLoading] = useState(false);
   const APIKEY = "AIzaSyC9VvVUPAPZVocuPxjAAi7UdjQdJ1l-knE";
   const [inpFields, setInputFields] = useState(defaultFields);
   const onChangeHandler = (e) => {
@@ -92,6 +106,7 @@ const LoginPage = () => {
     setInputFields(obj);
   };
   const onClickHandler = async () => {
+    setBtnLoading(true);
     const res = await fetch(
       `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${APIKEY}`,
       {
@@ -106,9 +121,13 @@ const LoginPage = () => {
     const data = await res.json();
     if (!res.ok) {
       const msg = await data.error.message;
-      alert(msg);
+      setBtnLoading(false);
+      setTimeout(() => {
+        alert(msg);
+      }, 200);
     }
     if (res.ok) {
+      setBtnLoading(false);
       alert("Login Succesfull");
       setInputFields(defaultFields);
       history.push("/");
@@ -116,6 +135,7 @@ const LoginPage = () => {
       dispatch({ type: "login", email: inpFields.email, idToken: idToken });
     }
   };
+  const btnLoader = <BtnLoad></BtnLoad>;
   return (
     <OuterBox img={login}>
       <LoginBox>
@@ -135,7 +155,9 @@ const LoginPage = () => {
             onChange={onChangeHandler}
             value={inpFields.password}
           />
-          <button onClick={onClickHandler}>Login</button>
+          <button onClick={onClickHandler}>
+            {btnLoading ? btnLoader : "Login"}
+          </button>
 
           <Link to="/register">
             <p>New User? Register Now</p>

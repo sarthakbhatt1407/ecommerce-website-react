@@ -17,8 +17,11 @@ const MainBox = styled.div`
   }
 `;
 const LoaderDiv = styled.div`
-  display: block;
-  margin: auto;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 const SliderBox = styled.div``;
 const ContentBox = styled.div`
@@ -61,12 +64,12 @@ const ProductPage = () => {
   };
   return (
     <>
+      {isLoading && (
+        <LoaderDiv>
+          <Loader />
+        </LoaderDiv>
+      )}
       <MainBox>
-        {isLoading && (
-          <LoaderDiv>
-            <Loader />
-          </LoaderDiv>
-        )}
         {product.length > 0 && (
           <SliderBox>
             {images && <ProductPageSlider images={images} />}
@@ -84,7 +87,7 @@ const ProductPage = () => {
           </ContentBox>
         )}
       </MainBox>
-      <Footer />
+      {!isLoading && <Footer />}
     </>
   );
 };

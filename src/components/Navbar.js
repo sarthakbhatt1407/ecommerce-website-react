@@ -36,6 +36,14 @@ const PcTabLinksBox = styled.div`
   gap: 1rem;
   align-items: center;
   justify-content: center;
+  a {
+    padding: 0.4rem 1rem;
+    &:hover {
+      border-radius: 0.6rem;
+      color: white;
+      background-color: #0081c9;
+    }
+  }
   @media (max-width: 450px) {
     display: none;
   }
@@ -54,7 +62,6 @@ const TogglerBtn = styled.button`
     display: block;
   }
 `;
-const TogglerBtnCross = styled.button``;
 const MobLinksBox = styled.div`
   animation: fadeInLeft;
   animation-duration: 0.2s;

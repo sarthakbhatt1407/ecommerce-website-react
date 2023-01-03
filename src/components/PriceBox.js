@@ -138,9 +138,13 @@ const PriceBox = (props) => {
           <Link to="/">
             <button>Continue Shopping</button>
           </Link>
-          <Link to={BtnAdd}>
-            <button onClick={props.onClick}>Checkout</button>
-          </Link>
+          {props.dis && (
+            <Link to={BtnAdd}>
+              <button className="checkoutBtn" onClick={props.onClick}>
+                Checkout
+              </button>
+            </Link>
+          )}
         </div>
       </CheckeoutAmountBox>
     </PriceBoxDiv>

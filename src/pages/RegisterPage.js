@@ -1,9 +1,21 @@
+import { faL } from "@fortawesome/free-solid-svg-icons";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import register from "../assets/register.svg";
-
+const spin = keyframes`
+0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+`;
+const BtnLoad = styled.div`
+  border: 3px solid white; /* Light grey */
+  border-top: 3px solid black; /* Blue */
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  animation: ${spin} 2s linear infinite;
+`;
 const OuterBox = styled.div`
   height: 100vh;
   position: relative;
@@ -27,7 +39,7 @@ const LoginBox = styled.div`
   background-color: white;
   border-radius: 0.5rem;
   box-shadow: 0.1rem 0.2rem 0.5rem #a5a5a5;
-  transform: translate(-45%, -50%);
+  transform: translate(-47%, -50%);
   @media (max-width: 750px) {
     left: 47%;
     height: 50vh;
@@ -55,6 +67,8 @@ const FormBox = styled.div`
     }
   }
   button {
+    display: flex;
+    justify-content: center;
     border: none;
     padding: 0.5rem 1rem;
     background-color: #4b74d9;
@@ -75,6 +89,7 @@ const Input = styled.input`
 const RegisterPage = () => {
   const APIKEY = "AIzaSyC9VvVUPAPZVocuPxjAAi7UdjQdJ1l-knE";
   const dispatch = useDispatch();
+  const [btnLoading, setBtnLoading] = useState(false);
   const defaultFields = {
     email: "",
     password: "",
@@ -91,6 +106,7 @@ const RegisterPage = () => {
     setInputFields(obj);
   };
   const onClickHandler = async () => {
+    setBtnLoading(true);
     const res = await fetch(
       `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${APIKEY}`,
       {
@@ -104,10 +120,14 @@ const RegisterPage = () => {
     );
     const data = await res.json();
     if (!res.ok) {
+      setBtnLoading(false);
       const msg = await data.error.message;
-      alert(msg);
+      setTimeout(() => {
+        alert(msg);
+      }, 200);
     }
     if (res.ok) {
+      setBtnLoading(false);
       alert("Sign Up Succesfull, Kindly Login Now");
       const userObj = {
         email: inpFields.email,
@@ -125,7 +145,7 @@ const RegisterPage = () => {
       history.push("/login");
     }
   };
-
+  const btnLoader = <BtnLoad></BtnLoad>;
   return (
     <OuterBox img={register}>
       <LoginBox>
@@ -145,8 +165,9 @@ const RegisterPage = () => {
             onChange={onChangeHandler}
             value={inpFields.password}
           />
-          <button onClick={onClickHandler}>Register</button>
-
+          <button onClick={onClickHandler}>
+            {btnLoading ? btnLoader : "Register"}
+          </button>
           <Link to="/login">
             <p>Existing User? Login Now</p>
           </Link>

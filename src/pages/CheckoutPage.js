@@ -110,6 +110,16 @@ const CheckoutPage = () => {
   };
   const [address, setAddress] = useState(defaultField);
   const onChangeHandler = (e) => {
+    if (
+      address.name.trim().length > 2 &&
+      address.phone.trim().length > 9 &&
+      address.city.trim().length > 2 &&
+      address.pinCode.trim().length > 3 &&
+      address.streetaddress.trim().length > 5 &&
+      address.state.trim().length > 2
+    ) {
+      setValidAddress(true);
+    }
     const id = e.target.id;
     const val = e.target.value;
     const ele = document.getElementById(id);
@@ -120,26 +130,18 @@ const CheckoutPage = () => {
 
     setAddress({ ...address, [id]: val });
   };
-  const fieldsChecker = () => {
-    const { name, phone, streetaddress, pinCode, state } = address;
-    if (
-      name.trim().length > 1 &&
-      phone.length > 9 &&
-      streetaddress.trim().length > 5 &&
-      pinCode.trim().length < 6 &&
-      pinCode.trim().length > 5 &&
-      state.trim().length > 2
-    ) {
-      return true;
-    } else {
-      if (!name.trim().length > 1) {
-        const ele = document.getElementById("name");
-        ele.style.border = "1px solid red";
-        ele.placeholder = "Enter Name";
-      }
-    }
-  };
+
   const onBlurhandler = (e) => {
+    if (
+      address.name.trim().length > 2 &&
+      address.phone.trim().length > 9 &&
+      address.city.trim().length > 2 &&
+      address.pinCode.trim().length > 3 &&
+      address.streetaddress.trim().length > 5 &&
+      address.state.trim().length > 2
+    ) {
+      setValidAddress(true);
+    }
     const id = e.target.id;
     const ele = document.getElementById(id);
     if (e.target.value.trim().length < 1) {
@@ -152,6 +154,7 @@ const CheckoutPage = () => {
   const items = useSelector((state) => state.items);
   const email = useSelector((state) => state.userEmail).split("@")[0];
   // console.log(email);
+  const [validAddress, setValidAddress] = useState(false);
   const totalAmount = useSelector((state) => state.totalAmount);
   const addressSubmitter = async () => {
     const obj = {
@@ -159,7 +162,7 @@ const CheckoutPage = () => {
     };
     const dateObj = new Date();
     const date = dateObj.getDate();
-    const month = dateObj.getMonth();
+    let month = dateObj.getMonth();
     const year = dateObj.getFullYear();
     const hour24 = dateObj.getHours();
     const hour12 = hour24 > 12 ? hour24 - 12 : hour24;
@@ -222,7 +225,6 @@ const CheckoutPage = () => {
       }
     );
   };
-  console.log();
   return (
     <>
       <OuterBox>
@@ -301,10 +303,15 @@ const CheckoutPage = () => {
               })}
             </ItemBox>
           </ItemAddressBox>
-          <PriceBox BtnLinkAdd={`/payment`} onClick={addressSubmitter} />
+
+          <PriceBox
+            BtnLinkAdd={`/payment`}
+            dis={validAddress}
+            onClick={addressSubmitter}
+          />
         </MainBox>
       </OuterBox>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
